@@ -29,6 +29,13 @@ public class EnemyAI : MonoBehaviour
     // Composant Rigidbody2D utilisé pour le mouvement physique de l'ennemi
     public Rigidbody2D rb;
 
+    public Animator animator;
+
+    public SpriteRenderer spriteRenderer;
+
+    public float attackCooldown = 2f; // Temps d'attente entre les attaques
+    private float currentAttackCooldown;
+
     // Méthode appelée au début de l'exécution
     void Start()
     {
@@ -53,6 +60,23 @@ public class EnemyAI : MonoBehaviour
         {
             path = p;
             currWp = 0;
+        }
+    }
+
+    void Update()
+    {
+        animator.SetFloat("Speed", rb.linearVelocity.sqrMagnitude);
+
+        if(rb.linearVelocity.x != 0)
+        {
+            spriteRenderer.flipX = rb.linearVelocity.x < 0;
+        }
+
+        currentAttackCooldown -= Time.deltaTime;
+
+        if(currentAttackCooldown <= 0)
+        {
+            currentAttackCooldown = 0;
         }
     }
 
@@ -92,5 +116,37 @@ public class EnemyAI : MonoBehaviour
                 currWp++;
             }
         }
+        else
+        {
+            if(currentAttackCooldown <= 0)
+            {
+                Attack();
+            }
+        }
+    }
+
+    void Attack()
+    {
+        animator.SetBool("IsAttacking", true);
+        currentAttackCooldown = attackCooldown;
+        animator.SetTrigger("Attack");
+
+    }
+
+    void EndOfAttack()
+    {
+        animator.SetBool("IsAttacking", false);
+
+        if(Vector2.Distance(transform.position, target.position) <= attackRange)
+        {
+            // Ici, vous pouvez ajouter le code pour infliger des dégâts au joueur
+            Debug.Log("Player hit by enemy attack!");
+        }
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 }

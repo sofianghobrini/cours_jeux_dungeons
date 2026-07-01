@@ -2912,8 +2912,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 1
+  m_Offset: {x: -0.025031805, y: 0}
+  m_Radius: 0.5076976
 --- !u!114 &836479835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3031,6 +3031,7 @@ GameObject:
   - component: {fileID: 1859034637}
   - component: {fileID: 1859034636}
   - component: {fileID: 1859034641}
+  - component: {fileID: 1859034642}
   m_Layer: 0
   m_Name: Ennemy
   m_TagString: Ennemy
@@ -3080,9 +3081,12 @@ MonoBehaviour:
   target: {fileID: 836479832}
   speed: 120
   nextWpDistance: 1
-  attackRange: 2
+  attackRange: 1.5
   seeker: {fileID: 1859034638}
   rb: {fileID: 1859034636}
+  animator: {fileID: 1859034642}
+  spriteRenderer: {fileID: 1859034639}
+  attackCooldown: 2
 --- !u!114 &1859034638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3221,6 +3225,28 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.52
+--- !u!95 &1859034642
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1859034635}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8cfd8390acc27cc40a0c457bfdfcfee8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
