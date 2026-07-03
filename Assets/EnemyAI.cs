@@ -36,6 +36,8 @@ public class EnemyAI : MonoBehaviour
     public float attackCooldown = 2f; // Temps d'attente entre les attaques
     private float currentAttackCooldown;
 
+    public int damage = 1; // Dégâts infligés au joueur lors d'une attaque
+
     // Méthode appelée au début de l'exécution
     void Start()
     {
@@ -139,8 +141,7 @@ public class EnemyAI : MonoBehaviour
 
         if(Vector2.Distance(transform.position, target.position) <= attackRange)
         {
-            // Ici, vous pouvez ajouter le code pour infliger des dégâts au joueur
-            Debug.Log("Player hit by enemy attack!");
+            target.GetComponent<PlayerHealth>().takeDamage(damage);
         }
     }
 

@@ -12,23 +12,28 @@ public class PlayerMovement : MonoBehaviour
 
     public SpriteRenderer spriteRenderer;
 
+    public PlayerHealth playerHealth;
 
     // Update is called once per frame
     void Update()
     {
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
+        if(playerHealth.isAlive)
+        {
+            movement.x = Input.GetAxisRaw("Horizontal");
+            movement.y = Input.GetAxisRaw("Vertical");
 
-        movement = movement.normalized;
+            movement = movement.normalized;
 
 
-        animator.SetFloat("Speed", movement.sqrMagnitude);
+            animator.SetFloat("Speed", movement.sqrMagnitude);
         
 
-        if(movement.x != 0)
-        {
-            spriteRenderer.flipX = movement.x < 0;
+            if(movement.x != 0)
+            {
+                spriteRenderer.flipX = movement.x < 0;
+            }
         }
+        
     }
 
     void FixedUpdate()

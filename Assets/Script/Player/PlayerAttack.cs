@@ -13,10 +13,12 @@ public class PlayerAttack : MonoBehaviour
     public SpriteRenderer spriteRenderer;
 
     public Animator animator;
+
+    public PlayerHealth playerHealth;
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && playerHealth.isAlive)
         {
             PerformAttack();
         }
@@ -51,4 +53,6 @@ public class PlayerAttack : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
+
+    
 }
