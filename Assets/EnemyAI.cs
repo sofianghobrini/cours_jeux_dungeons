@@ -17,6 +17,8 @@ public class EnemyAI : MonoBehaviour
     // Distance minimale pour déclencher une attaque (l'ennemi s'arrête en dehors de cette portée)
     public float attackRange = 2f;
 
+    public float detectionRange = 7f; // Distance à laquelle l'ennemi détecte le joueur
+
     // Chemin calculé par le Seeker
     public Path path;
 
@@ -38,6 +40,18 @@ public class EnemyAI : MonoBehaviour
 
     public int damage = 1; // Dégâts infligés au joueur lors d'une attaque
 
+    private bool isAlive = true;
+
+    public int maxHealth = 2; // Santé maximale de l'ennemi
+    private int currentHealth; // Santé actuelle de l'ennemi
+
+
+
+    void Awake()
+    {
+        currentHealth = maxHealth; // Initialise la santé actuelle à la santé maximale
+    }
+
     // Méthode appelée au début de l'exécution
     void Start()
     {
@@ -49,7 +63,7 @@ public class EnemyAI : MonoBehaviour
     void UpdatePath()
     {
         // Vérifie si le Seeker est prêt à calculer un nouveau chemin
-        if (seeker.IsDone())
+        if (isAlive && seeker.IsDone() && Vector2.Distance(transform.position, target.position) <= detectionRange)
             // Demande un nouveau chemin du Seeker entre la position actuelle et la cible
             seeker.StartPath(rb.position, target.position, OnPathComplete);
     }
@@ -67,6 +81,11 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
+        if(!isAlive)
+        {
+            return;
+        }
+
         animator.SetFloat("Speed", rb.linearVelocity.sqrMagnitude);
 
         if(rb.linearVelocity.x != 0)
@@ -86,7 +105,7 @@ public class EnemyAI : MonoBehaviour
     void FixedUpdate()
     {
         // Si aucun chemin n'a été calculé ou si tous les waypoints ont été atteints, ne fait rien
-        if (path == null || currWp >= path.vectorPath.Count)
+        if (path == null || currWp >= path.vectorPath.Count || !isAlive)
         {
             return;
         }
@@ -145,9 +164,34 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    public void TakeDamage(int damage)
+    {
+        if(isAlive)
+        {
+            currentHealth -= damage;
+            if(currentHealth <= 0)
+            {
+                isAlive = false;
+                animator.SetTrigger("Die");
+                Destroy(gameObject, 3f); // Détruit l'ennemi après 1 seconde pour laisser le temps à l'animation de mort de se jouer 
+            } else
+            {
+                animator.SetTrigger("Hit");
+                currentAttackCooldown = attackCooldown; // Reset the attack cooldown when hit
+
+                
+            }
+        }
+
+        
+    }
+
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
+        
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, detectionRange);
     }
 }

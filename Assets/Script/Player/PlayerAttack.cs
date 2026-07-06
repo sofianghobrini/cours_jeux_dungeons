@@ -41,8 +41,13 @@ public class PlayerAttack : MonoBehaviour
 
                 if(Vector2.Dot(attackDirection, directionToEnemy) > 0)
                 {
-                    // The enemy is in the attack direction
-                    Debug.Log("Enemy hit: ");
+                    EnemyAI enemyAI = collider.GetComponent<EnemyAI>();
+                    if (enemyAI != null)
+                    {
+                        enemyAI.TakeDamage(damage);
+                        Vector2 knockbackDirection = (collider.transform.position - transform.position).normalized;
+                        enemyAI.rb.AddForce(knockbackDirection * 5f, ForceMode2D.Impulse); // Apply knockback force
+                    }
                 }
             }
         }
