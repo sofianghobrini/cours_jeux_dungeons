@@ -53,6 +53,7 @@
     <Compile Include="Assets\Script\LoadLevel.cs" />
     <Compile Include="Assets\Script\Player\PlayerAttack.cs" />
     <Compile Include="Assets\Script\Player\PlayerMovement.cs" />
+    <Compile Include="Assets\Script\FadeManager.cs" />
     <Compile Include="Assets\EnemyAI.cs" />
     <Compile Include="Assets\Script\Player\PlayerHealth.cs" />
   </ItemGroup>
