@@ -45,7 +45,7 @@ public class EnemyAI : MonoBehaviour
     public int maxHealth = 2; // Santé maximale de l'ennemi
     private int currentHealth; // Santé actuelle de l'ennemi
 
-
+    public GameObject CoinPrefab; // Préfabriqué de la barre de santé
 
     void Awake()
     {
@@ -173,6 +173,7 @@ public class EnemyAI : MonoBehaviour
             {
                 isAlive = false;
                 animator.SetTrigger("Die");
+                Instantiate(CoinPrefab, transform.position, transform.rotation); // Instancie le prefab de la barre de santé à la position de l'ennemi
                 Destroy(gameObject, 3f); // Détruit l'ennemi après 1 seconde pour laisser le temps à l'animation de mort de se jouer 
             } else
             {

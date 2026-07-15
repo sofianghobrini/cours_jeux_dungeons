@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 7395301205046498068}
   - component: {fileID: 5587411746011558152}
   - component: {fileID: 4867253115995461565}
+  - component: {fileID: 8746649012994745980}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -234,3 +235,17 @@ MonoBehaviour:
   healthBarPrefab: {fileID: 5788524040695076076, guid: c1ef47d1750da414ab05d4a10bfe3638, type: 3}
   animator: {fileID: 7356580194047040941}
   spriteRenderer: {fileID: 1955517086533464596}
+--- !u!114 &8746649012994745980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6921840028742820487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 123b8f75dce1b104384f6e51d7c8bce1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  coinText: {fileID: 0}
+  coinCount: 0

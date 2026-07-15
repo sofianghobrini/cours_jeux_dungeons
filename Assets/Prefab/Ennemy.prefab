@@ -148,6 +148,7 @@ MonoBehaviour:
   attackCooldown: 2
   damage: 1
   maxHealth: 5
+  CoinPrefab: {fileID: 5401071138905459086, guid: 40de145b3efb4dc4ba51ffcd4aefa700, type: 3}
 --- !u!50 &7527606794788102326
 Rigidbody2D:
   serializedVersion: 5

@@ -10,6 +10,8 @@ public class LoadLevel : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             StartCoroutine(LoadLevelWithFade(levelName));
+            PlayerPrefs.SetInt("Money", PlayerMoney.Instance.coinCount); // Sauvegarde le nombre de pièces du joueur
+            PlayerPrefs.Save(); // Assurez-vous de sauvegarder les PlayerPrefs
         }
     }
 
